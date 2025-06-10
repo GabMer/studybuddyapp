@@ -20,9 +20,8 @@ export class Tab2Page implements OnInit {
   calendarMatrix: Date[][] = [];
 
   events: { [key: string]: { title: string; hour: number }[] } = {
-  '2025-05-15': [{ title: 'Entrega proyecto', hour: 14 }]
+    '2025-05-15': [{ title: 'Entrega proyecto', hour: 14 }]
   };
-
 
   hours: string[] = Array.from({ length: 24 }, (_, i) => {
     const hour = i === 0 ? 12 : i > 12 ? i - 12 : i;
@@ -31,14 +30,14 @@ export class Tab2Page implements OnInit {
   });
 
   ngOnInit() {
-    this.generateCalendar();
+    this.GENERATE_CALENDAR();
   }
 
   get selectedDateStr(): string {
     return this.selectedDate.toISOString().split('T')[0];
   }
 
-  generateCalendar(): void {
+  GENERATE_CALENDAR(): void {
     const start = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
     const end = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0);
     const calendar: Date[][] = [];
@@ -59,16 +58,16 @@ export class Tab2Page implements OnInit {
     this.calendarMatrix = calendar;
   }
 
-  isToday(date: Date): boolean {
+  IS_TODAY(date: Date): boolean {
     const today = new Date();
     return date.toDateString() === today.toDateString();
   }
 
-  isSelected(date: Date): boolean {
+  IS_SELECTED(date: Date): boolean {
     return date.toDateString() === this.selectedDate.toDateString();
   }
 
-  selectDate(date: Date): void {
+  SELECT_DATE(date: Date): void {
     this.selectedDate = date;
     const key = this.selectedDateStr;
     if (!this.events[key]) {
@@ -76,35 +75,35 @@ export class Tab2Page implements OnInit {
     }
   }
 
-  addEvent(): void {
-  const key = this.selectedDateStr;
-  const title = prompt('Enter event title');
-  const hourInput = prompt('Enter hour (0–23)');
-  const hour = Number(hourInput);
+  ADD_EVENT(): void {
+    const key = this.selectedDateStr;
+    const title = prompt('Enter event title');
+    const hourInput = prompt('Enter hour (0–23)');
+    const hour = Number(hourInput);
 
-  if (title && !isNaN(hour) && hour >= 0 && hour <= 23) {
-    if (!this.events[key]) this.events[key] = [];
-    this.events[key].push({ title, hour });
-  } else {
-    alert('Invalid input');
+    if (title && !isNaN(hour) && hour >= 0 && hour <= 23) {
+      if (!this.events[key]) this.events[key] = [];
+      this.events[key].push({ title, hour });
+    } else {
+      alert('Invalid input');
+    }
   }
-}
 
-  prevMonth(): void {
+  PREV_MONTH(): void {
     this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1);
-    this.generateCalendar();
+    this.GENERATE_CALENDAR();
   }
 
-  nextMonth(): void {
+  NEXT_MONTH(): void {
     this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1);
-    this.generateCalendar();
+    this.GENERATE_CALENDAR();
   }
 
-  onViewChange(event: any): void {
+  ON_VIEW_CHANGE(event: any): void {
     this.currentView = event.detail.value;
   }
 
-  getCurrentWeek(): Date[] {
+  GET_CURRENT_WEEK(): Date[] {
     const startOfWeek = new Date(this.selectedDate);
     startOfWeek.setDate(this.selectedDate.getDate() - this.selectedDate.getDay());
 

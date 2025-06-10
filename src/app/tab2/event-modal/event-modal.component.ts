@@ -27,11 +27,11 @@ export class EventModalComponent {
         });
     }
 
-    cancel() {
+    CANCEL() {
         this.modalCtrl.dismiss(null, 'cancel');
     }
 
-    confirm() {
+    CONFIRM() {
         if (this.eventForm.valid) {
             this.modalCtrl.dismiss(this.eventForm.value, 'confirm');
         }
