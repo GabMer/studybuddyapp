@@ -1,0 +1,32 @@
+ion-content {
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    ion-item {
+        --highlight-height: 1px;
+    }
+
+    ion-button {
+        margin-top: 24px;
+    }
+}
+
+/* Color picker input */
+ion-input[type="color"] {
+    input {
+        height: 32px;
+        padding: 4px;
+    }
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    ion-content {
+        padding: 24px;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
